@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Management - CSE (AIML)</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo-area">
+            <img src="iemlogo.png" alt="IEM Logo">
+            <div class="logo-text">
+                <h4>Institute of Engineering & Management</h4>
+                <p>Department of CSE (AIML) · Kolkata</p>
+            </div>
+        </div>
+        
+        <nav class="site-nav" id="siteNav">
+            <a href="#home" class="active">Home</a>
+            <a href="#events">Events</a>
+            <a href="#register">Register</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About us</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">☾</button>
+        </nav>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <div class="kicker">Odd semester 2026–27</div>
+            <h1>Events at the Department of CSE (AIML)</h1>
+            <p>Hackathons, workshops, guest lectures and the annual tech fest — one place to see what's coming up, register, and look back at what we've done.</p>
+            <div class="btn-group">
+                <button id="toggleEventsBtn" class="btn btn-primary">See upcoming events</button>
+                <button id="toggleRegisterBtn" class="btn btn-outline">Register now</button>
+            </div>
+        </div>
+        
+        <div class="countdown-card">
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: var(--text-muted);">Next event</div>
+            <h3 id="nextEventName">HackIEM 2026</h3>
+            <p id="nextEventMeta" style="font-size: 0.85rem; color: var(--text-muted);">Saturday 26 September, 2026 · AIML Lab, Gurukul Campus</p>
+            
+            <div class="countdown-timer">
+                <div class="time-box"><span id="cdDays">02</span><small>days</small></div>
+                <div class="time-box"><span id="cdHours">19</span><small>hours</small></div>
+                <div class="time-box"><span id="cdMins">52</span><small>minutes</small></div>
+                <div class="time-box"><span id="cdSecs">36</span><small>seconds</small></div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Right now in Kolkata: <strong id="liveClock" style="color: var(--text-main);">13:07:23</strong></div>
+        </div>
+    </section>
+
+    <section id="events">
+        <h2>Upcoming events</h2>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Filter by type, or scroll through everything scheduled this semester.</p>
+        
+        <div class="filter-chips">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="Technical">Technical</button>
+            <button class="chip" data-filter="Workshops">Workshops</button>
+            <button class="chip" data-filter="Cultural">Cultural</button>
+            <button class="chip" data-filter="Lectures">Lectures</button>
+        </div>
+
+        <div class="events-grid" id="eventsGridList"></div>
+    </section>
+
+    <section id="register">
+        <div class="form-container">
+            <h2 style="margin-bottom: 0.5rem;">Register for an event</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Open to all B.Tech students of IEM. One form per student per event. You'll receive a confirmation on your college email.</p>
+            
+            <form id="regForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group" id="group-name">
+                        <label>Student name</label>
+                        <input type="text" class="form-control" id="regName" placeholder="e.g. Ananya Sen">
+                        <div class="error-msg">This field is required or invalid.</div>
+                    </div>
+
+                    <div class="form-group" id="group-enroll">
+                        <label>Enrollment number (14 digits)</label>
+                        <input type="text" class="form-control" id="regEnroll" placeholder="14-digit enrollment no.">
+                        <div class="error-msg">Enter a valid 14-digit enrollment number.</div>
+                    </div>
+
+                    <div class="form-group" id="group-dept">
+                        <label>Department</label>
+                        <select class="form-control" id="regDept">
+                            <option value="">Select department</option>
+                            <option value="CSE(AIML)">CSE (AIML)</option>
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                        </select>
+                        <div class="error-msg">Select your department.</div>
+                    </div>
+
+                    <div class="form-group" id="group-year">
+                        <label>Year of study</label>
+                        <select class="form-control" id="regYear">
+                            <option value="">Select year</option>
+                            <option value="1st">1st Year</option>
+                            <option value="2nd">2nd Year</option>
+                            <option value="3rd">3rd Year</option>
+                            <option value="4th">4th Year</option>
+                        </select>
+                        <div class="error-msg">Select your year of study.</div>
+                    </div>
+
+                    <div class="form-group" id="group-email">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="regEmail" placeholder="you@iem.edu.in">
+                        <div class="error-msg">Enter a valid email address.</div>
+                    </div>
+
+                    <div class="form-group" id="group-phone">
+                        <label>Phone number</label>
+                        <input type="text" class="form-control" id="regPhone" placeholder="10-digit mobile number">
+                        <div class="error-msg">Enter a valid 10-digit phone number.</div>
+                    </div>
+
+                    <div class="form-group full-width" id="group-gender">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="gender" value="Female"> Female</label>
+                            <label class="radio-label"><input type="radio" name="gender" value="Male"> Male</label>
+                            <label class="radio-label"><input type="radio" name="gender" value="Other"> Other</label>
+                            <label class="radio-label"><input type="radio" name="gender" value="Prefer not to say"> Prefer not to say</label>
+                        </div>
+                        <div class="error-msg">Select an option.</div>
+                    </div>
+
+                    <div class="form-group full-width" id="group-event">
+                        <label>Event</label>
+                        <select class="form-control" id="regEventSelect">
+                            <option value="">Select an event</option>
+                        </select>
+                        <div class="error-msg">Select the event you want to register for.</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit registration</button>
+                <p id="formSuccessMsg" style="color: var(--accent); font-weight: 600; text-align: center; margin-top: 1rem; display: none;"></p>
+            </form>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Moments from last year's events. Hover or tap an image to see its caption.</p>
+        
+        <div class="gallery-grid">
+            <!-- 2 Seminar Lecture Pictures -->
+            <figure class="gallery-figure">
+                <img src="sem1.jpg">
+                <figcaption>Large Language Model Seminar 2025</figcaption>
+            </figure>
+            <figure class="gallery-figure">
+                <img src="sem2.jpg">
+                <figcaption>Hands on Deep Learning with Pytech Seminar 2025</figcaption>
+            </figure>
+
+            <!-- 1 Durga Puja Cultural Program Picture -->
+            <figure class="gallery-figure">
+                <img src="durgapuja.jpg">
+                <figcaption>Sharad Sandhya 2025</figcaption>
+            </figure>
+
+            <!-- 2 Robotics Competition Pictures -->
+            <figure class="gallery-figure">
+                <img src="robotics1.jpg">
+                <figcaption>Roboverse Robotics Challenge 2025</figcaption>
+            </figure>
+            <figure class="gallery-figure">
+                <img src="robotics2.jpg">
+                <figcaption>Innovacion Robotics Challenge 2025</figcaption>
+            </figure>
+
+            <!-- 1 Hackathon Picture -->
+            <figure class="gallery-figure">
+                <img src="hackathon.jpg">
+                <figcaption>HackIEM 2025</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About us</h2>
+        <div class="about-grid" style="margin-top: 2rem;">
+            <div>
+                <p style="color: var(--text-muted); margin-bottom: 1.2rem;">
+                    The Department of Computer Science & Engineering (Artificial Intelligence and Machine Learning) at the Institute of Engineering & Management, Kolkata, offers a four-year B.Tech programme focused on machine learning, deep learning, data science and their applications.
+                </p>
+                <p style="color: var(--text-muted);">
+                    The department runs dedicated AIML and IoT laboratories and works closely with the IETE Student Forum and the institute's innovation cell. Department events are planned by a student committee under faculty guidance.
+                </p>
+            </div>
+            
+            <dl class="coordinators-panel">
+                <dt>Faculty coordinator</dt>
+                <dd>Dr. Sudipta Bhattacharya<br><small style="color: var(--text-muted);">Associate Professor, CSE (AIML)</small></dd>
+                
+                <dt>Student coordinator</dt>
+                <dd>Ritwika Das<br><small style="color: var(--text-muted);">3rd year, CSE (AIML)</small></dd>
+                
+                <dt>Technical lead</dt>
+                <dd>Arnab Mukherjee<br><small style="color: var(--text-muted);">4th year, CSE (AIML)</small></dd>
+                
+                <dt>Cultural lead</dt>
+                <dd>Sneha Roy<br><small style="color: var(--text-muted);">2nd year, CSE (AIML)</small></dd>
+            </dl>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Questions about an event, sponsorship, or a registration problem? Write to us.</p>
+        
+        <div class="contact-grid">
+            <div>
+                <address>
+                    <strong>Address</strong><br>
+                    Department of CSE (AIML), Institute of Engineering & Management<br>
+                    Gurukul Campus, Y-12, Block EP, Sector V, Salt Lake<br>
+                    Kolkata 700091, West Bengal, India<br><br>
+                    
+                    <strong>Email</strong><br>
+                    <a href="mailto:events.aiml@iem.edu.in">events.aiml@iem.edu.in</a><br><br>
+                    
+                    <strong>Phone</strong><br>
+                    <a href="tel:+913323572059">+91 33 2357 2059</a><br><br>
+                    
+                    <strong>Office hours</strong><br>
+                    Monday–Friday, 10:00–17:00
+                </address>
+            </div>
+            
+            <div class="feedback-box">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1.2rem;">Send feedback</h3>
+                <form id="feedbackForm" novalidate>
+                    <div class="form-group" id="fb-group-name">
+                        <label>Your name</label>
+                        <input type="text" class="form-control" id="fbName">
+                        <div class="error-msg">Name is required.</div>
+                    </div>
+                    <div class="form-group" id="fb-group-email">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="fbEmail">
+                        <div class="error-msg">Valid email required.</div>
+                    </div>
+                    <div class="form-group" id="fb-group-msg">
+                        <label>Message</label>
+                        <textarea class="form-control" id="fbMsg" rows="4" placeholder="Tell us what worked, what didn't..."></textarea>
+                        <div class="error-msg">Message must be at least 15 characters.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send feedback</button>
+                    <p id="fbSuccessMsg" style="color: var(--accent); font-weight: 600; text-align: center; margin-top: 1rem; display: none;">Feedback sent successfully!</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Department of CSE (AIML), Institute of Engineering & Management, Kolkata. Built with HTML5, CSS3 and JavaScript for PCCCS382 — IT Workshop.</p>
+        <p style="margin-top: 0.5rem;"><a href="#home">Back to top</a></p>
+    </footer>
+
+    <!-- Link to external JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
